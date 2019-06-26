@@ -1,0 +1,38 @@
+/* pages/store_list/store_list.wxss */
+ 
+.store-list-item  {
+  background-color: #fff;
+  border-bottom:1px solid #f5f3f4;
+}
+
+.store-list-item  .weui-cell__hd {
+  width: 20px;
+  height: 0px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.store-list-item  .weui-cell__bd {
+  padding-left: 16px;
+}
+
+.store-list-item  .store_name, .store-list-item  .locaiton {
+  
+  display: block;
+  text-align: left;
+}
+
+.store-list-item  .store_name {
+  font-size: 15px;
+}
+
+.store-list-item  .locaiton {
+  font-size: 14px;
+  color: #9c9c9c;
+}
+
+.store-list-item  image {
+  width: 100%;
+  position: absolute;
+  left: 0;
+}

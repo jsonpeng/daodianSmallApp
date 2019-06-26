@@ -1,0 +1,8 @@
+<import src="../../wxParse/wxParse.wxml" />
+<template name="default">
+<view class="post-title">{{notices.name}}</view>
+<view class="post-sub-title">发表于 <text> {{notices.created_at}}</text></view>
+<view class="post-content">
+  <template is="wxParse" data="{{ wxParseData:contents.nodes  }}" />
+</view>
+</template>

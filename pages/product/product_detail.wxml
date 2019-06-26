@@ -1,0 +1,22 @@
+<!-- <view class='title weui-cell'>
+  <view class='title'>介绍</view>
+  <view class='name'>商品名称</view>
+  <view class='pic'>
+    <image mode='widthFix' src='../../images/products.jpg'></image>
+  </view>
+  <view class='line'></view>
+  <view class='t-head'>套餐详情</view>
+  <view class='weui-cell program'>
+    <view class='weui-cell__bd'>
+      <view class='name'>项目名称</view>
+      <view class='date'>有效期：购买后有效期</view>
+      <view class='times'>次数：×1</view>
+      <view class='text'>服务内容服务内容</view>
+    </view>
+  </view>
+</view> -->
+
+<import src="../../template/default/product_detail.wxml"  />
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>

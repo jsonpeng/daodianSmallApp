@@ -1,0 +1,194 @@
+<template name="default">
+  <scroll-view scroll-y="true" bindscrolltolower="pullUpLoad" style="height: {{ winHeight }}px;">
+
+    <view class="app-wrapper">
+       <view class="nav_tip" wx:if="{{ type !=0 }}">
+        <view class="img">
+          <view  bindtap='back'>
+            <image class="mail" id="mail" src="../../images/white_left.png"></image>
+          </view>
+        </view>
+        <!-- <view class="titile">发现</view> -->
+      </view> 
+      <!-- <view wx:if="{{ !type && post_cat_all.length > 0 }}"> -->
+      <view wx:if="{{ !type && post_cat_all.length > 0 }}">
+        <view class="weui-cell weui-cell_access nav-title">
+          <view class="weui-cell__bd">热门话题</view>
+        </view>
+
+        <view class="slide-box topic">
+          <view class="slide-warp">
+
+            <block wx:for="{{ post_cat_all }}" wx:key="item">
+              <view class="slide-item" data-id="{{ item.id }}" bindtap='switchFoundCat'>
+                <!-- <image src="../../images/default.png" alt="" wx:if="{{ !item.loaded }}"></image> -->
+                <image src="{{ item.image }}" alt=""></image>
+                <view class="text">#{{ item.name }}#</view>
+              </view>
+            </block>
+
+          </view>
+        </view>
+      </view>
+
+      <!--  内容切换 -->
+      <view class="weui-cell  tab-list">
+        <view class="weui-cell__hd {{ bottomtab==0 ? 'active' : '' }}" data-index="0" bindtap='switchBottomTab'>
+          <span>最新</span>
+        </view>
+        <view class="weui-cell__bd {{ bottomtab==1 ? 'active' : '' }}" data-index="1" bindtap='switchBottomTab'>
+          <span>热门</span>
+        </view>
+      </view>
+      <view class="content-box">
+
+        <!--最新的-->
+        <view class="tab-item-1" wx:if="{{showHotNews}}">
+          <view class="tab-box-1">
+            <block wx:for="{{ post_found }}" wx:key="item" wx:for-index="index">
+              <view class="user-share-content scroll-item">
+                <view class="weui-cell">
+                  <view class="weui-cell__hd user-img">
+                    <image src="{{ logo=='' ? 'https://quanqiugo.club/uploads/%E6%9C%AA%E5%91%BD%E5%90%8D_LOGO%E8%AE%BE%E8%AE%A1_2018.03.22.png' : logo }}" alt="{{ logo }}" wx:if="{{ item.is_admin }}"></image>
+                      <image src="{{ item.user.head_image }}" alt="" wx:if="{{ !item.is_admin }}"></image>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <view class="share-name">{{ item.admin.name }}</view>
+                    <view class="date">{{ item.humanTime }}</view>
+                  </view>
+                </view>
+
+                <view class="weui-cell">
+                  <view class="weui-cell__hd text">
+                    <!-- <template is="wxParse" data="{{ wxParseData:contents[index].nodes  }}"/> -->{{ item.content }}
+                  </view>
+                </view>
+
+
+                <view class="weui-cell">
+                  <view class="pic-show-list">
+
+                    <block wx:for="{{ item.images }}" wx:key="itemimages" wx:for-item="itemimages" wx:for-index="imageindex">
+                      <view class="pic-show">
+                        <view class="img" bindtap='previewImage' data-index="{{ index }}" data-imageindex="{{ imageindex }}">
+                          <image src="{{ itemimages.url }}" alt=""></image>
+                        </view>
+                      </view>
+                    </block>
+
+                  </view>
+                </view>
+
+                <block wx:for="{{ item.products }}" wx:key="product" wx:for-item="product">
+
+                  <!--有商品规格的商品-->
+                  <navigator class="weui-cell share-link" url="../product/product?product_id={{ product.id }}" wx:if="{{ product.specs.length > 0 }}">
+                    <view class="weui-cell__hd">
+                      <image src="{{ product.image }}" alt=""></image>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <!--遍历规格信息-->
+                      <block wx:for="{{ product.specs}}" wx:key="specs" wx:for-item="specs">
+                        <text wx:if="{{ product.pivot.spec_price_id == specs.id }}">【{{ specs.key_name }}】</text>
+                      </block>
+                      {{ product.name }}
+                    </view>
+                  </navigator>
+
+                  <!--没有商品规格的商品-->
+                  <navigator class="weui-cell share-link" url="../product/product?product_id={{ product.id }}" wx:else>
+                    <view class="weui-cell__hd">
+                      <image src="{{ product.image }}" alt=""></image>
+                    </view>
+                    <view class="weui-cell__bd">
+                      {{ product.name }}
+                    </view>
+                  </navigator>
+                </block>
+
+              </view>
+            </block>
+
+          </view>
+          <view style="text-align: center; padding-bottom: 20px;font-size:14px;" wx:if="{{ whetherShowMore }}">
+            别扯了,没有更多了
+          </view>
+        </view>
+        <!-- 热门的 -->
+        <view class="tab-item-1" wx:if="{{!showHotNews}}">
+          <view class="tab-box-1">
+            <block wx:for="{{ post_found }}" wx:key="item" wx:for-index="index">
+              <view class="user-share-content scroll-item">
+                <view class="weui-cell">
+                  <view class="weui-cell__hd user-img">
+                      <image src="{{ logo=='' ? 'https://quanqiugo.club/uploads/%E6%9C%AA%E5%91%BD%E5%90%8D_LOGO%E8%AE%BE%E8%AE%A1_2018.03.22.png' : logo }}" alt="{{ logo }}" wx:if="{{ item.is_admin }}"></image>
+                      <image src="{{ item.user.head_image }}" alt="" wx:if="{{ !item.is_admin }}"></image>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <view class="share-name">{{ item.admin.name }}</view>
+                    <view class="date">{{ item.humanTime }}</view>
+                  </view>
+                </view>
+
+                <view class="weui-cell">
+                  <view class="weui-cell__hd text">
+                    <!-- <template is="wxParse" data="{{ wxParseData:contents[index].nodes  }}"/> -->{{ item.content }}
+                  </view>
+                </view>
+
+
+                <view class="weui-cell">
+                  <view class="pic-show-list">
+
+                    <block wx:for="{{ item.images }}" wx:key="itemimages" wx:for-item="itemimages" wx:for-index="imageindex">
+                      <view class="pic-show">
+                        <view class="img" bindtap='previewImage' data-index="{{ index }}" data-imageindex="{{ imageindex }}">
+                          <image src="{{ itemimages.url }}" alt=""></image>
+                        </view>
+                      </view>
+                    </block>
+
+                  </view>
+                </view>
+
+                <block wx:for="{{ item.products }}" wx:key="product" wx:for-item="product">
+
+                  <!--有商品规格的商品-->
+                  <navigator class="weui-cell share-link" url="../product/product?product_id={{ product.id }}" wx:if="{{ product.specs.length > 0 }}">
+                    <view class="weui-cell__hd">
+                      <image src="{{ product.image }}" alt=""></image>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <!--遍历规格信息-->
+                      <block wx:for="{{ product.specs}}" wx:key="specs" wx:for-item="specs">
+                        <text wx:if="{{ product.pivot.spec_price_id == specs.id }}">【{{ specs.key_name }}】</text>
+                      </block>
+                      {{ product.name }}
+                    </view>
+                  </navigator>
+
+                  <!--没有商品规格的商品-->
+                  <navigator class="weui-cell share-link" url="../product/product?product_id={{ product.id }}" wx:else>
+                    <view class="weui-cell__hd">
+                      <image src="{{ product.image }}" alt=""></image>
+                    </view>
+                    <view class="weui-cell__bd">
+                      {{ product.name }}
+                    </view>
+                  </navigator>
+                </block>
+
+              </view>
+            </block>
+
+          </view>
+          <view style="text-align: center; padding-bottom: 20px;font-size:14px;" wx:if="{{ whetherShowMore }}">
+            别扯了,没有更多了
+          </view>
+        </view>
+      </view>
+    </view>
+        <!-- 发布按钮 -->
+    <navigator url='../publish/publish' class='issue_btn'><image src='../../images/sub.png' mode='widthFix'></image></navigator>
+  </scroll-view>
+</template>

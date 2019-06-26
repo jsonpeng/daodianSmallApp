@@ -1,0 +1,62 @@
+<template name="default">
+  <view class='weui-cells technician_detail'>
+    <view class='weui-cell'>
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style="height:{{imgheight}}px">
+        <block wx:for="{{ technician.images }}" wx:key="item">
+          <swiper-item>
+            <image class="img" style="display: block;" bindload="imageLoad" src="{{ item.url }}" data-src="{{item.url}}" mode="widthFix" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class='weui-cell'>
+      <view class='intr'>
+        <view class='name'>{{technician.name}}</view>
+        <view class='title'>{{technician.job}}</view>
+        <view class='add'>
+          <image class='location' src='../../images/location.png' mode='widthFix'></image>{{shop_add}}</view>
+      </view>
+    </view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd about'>
+        <view class='about-item'>
+          <image src='../../images/heart.png' mode='widthFix'></image>
+          <view>人气：{{technician.sentiment}}</view>
+        </view>
+        <view class='about-item'>
+          <image src='../../images/zan1.png' mode='widthFix'></image>
+          <view>点赞：{{technician.give_like}}</view>
+        </view>
+        <view class='about-item'>
+          <image src='../../images/share1.png' mode='widthFix'></image>
+          <view>转发：{{technician.forward}}</view>
+        </view>
+      </view>
+    </view>
+    <navigator class='weui-cell sub-form' url='../subscribe/addSubscribe?technician_id={{technician.id}}'>
+      <view>在线预约</view>
+    </navigator>
+    <view class='weui-cell head'>个人信息：</view>
+  </view>
+  <view class='info weui-cell'>
+    <view class='weui-cell__bd'>手机：{{technician.mobile}}</view>
+    <view class='weui-cell__ft'>
+      <image src='../../images/phone.png' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class='info weui-cell'>
+    <view class='weui-cell__bd'>微信：{{technician.weixin}}</view>
+    <view class='weui-cell__ft'>
+      <image src='../../images/copy.png' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class='info weui-cell store'>
+    <view class='weui-cell__bd'>门店：{{shop_add}}</view>
+    <view class='weui-cell__ft'>
+      <image src='../../images/line.png' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class='weui-cell sub-form synchronization'>
+    <view class='' bindtap='addToIPA'>同步到通讯录</view>
+  </view>
+</template>

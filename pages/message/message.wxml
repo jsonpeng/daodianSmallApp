@@ -1,0 +1,8 @@
+<import src="../../template/default/message.wxml"  />
+
+ <template is="{{ themeData.theme }}"  data="{{...themeData}}"></template> 
+
+
+
+
+

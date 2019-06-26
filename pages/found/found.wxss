@@ -1,0 +1,5 @@
+.weui-cell{padding:10px 7.5px;}
+.nav_tip{background-color: #121116;margin-bottom:5px;}
+.nav_tip .titile{color:#333;}
+.issue_btn{width: 80rpx;height: 80rpx;position: fixed;right: 20rpx;bottom:110rpx;border-radius: 50%;}
+.issue_btn image{width: 100%;}

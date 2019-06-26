@@ -1,0 +1,140 @@
+<template name="default">
+<!--pages/subscribe/addSubscribe.wxml-->
+<view class="weui-cells weui-cells_form">
+  <view  class="weui-cell ">
+    <view class="weui-cell__hd">
+      <label class="weui-label">门店</label>
+    </view>
+    <view class="weui-cell__bd">
+      {{shop_name}}
+      <view class="picker">
+        {{ shops[shop_tab]['name'] }}
+      </view>
+
+
+    </view>
+    <view class='weui-cell__ft'></view>
+  </view>
+    <!-- 指定技师 -->
+   <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <label class="weui-label">指定技师</label>
+    </view>
+    <view class="weui-cell__bd">
+      {{technician.name}}
+      <view class="picker">
+        {{ sconfig_show_data.jishi }}
+      </view>
+
+    </view>
+    <view class='weui-cell__ft'></view>
+  </view> 
+  <!-- 指定服务 -->
+   <view class="weui-cell weui-cell_access" bindtap='selectService'>
+    <view class="weui-cell__hd">
+      <label class="weui-label">指定服务</label>
+    </view>
+    <view class="weui-cell__bd">
+      {{service_active}}
+      <view class="picker">
+        {{ sconfig_show_data.service }}
+      </view>
+    </view>
+    <view class='weui-cell__ft'></view>
+  </view> 
+
+  <!-- 到店时间 -->
+  <view class="weui-cell weui-cell_access" bindtap='showTimetabel'>
+    <view class="weui-cell__hd">
+      <label class="weui-label">到店时间</label>
+    </view>
+    <view class="weui-cell__bd" catchtap='showTimetabel'>
+      <view class='picker'><text wx:if="{{ dateTime.detail_time != '' }}">{{ shopTimer[dateTime.timedateIndex] }} {{ dateTime.detail_time }}</text></view>
+    </view>
+    <view class='weui-cell__ft'></view>
+  </view>
+  <!-- 联系电话 -->
+  <view class="weui-cell weui-cell_access">
+    <view class="weui-cell__hd">
+      <label class="weui-label">联系电话</label>
+    </view>
+    <view class="weui-cell__bd">
+      {{ technician.mobile }}
+      <!-- <input class="weui-input" type="text" bindinput="savePhone" placeholder="电话" value="{{ technician.mobile }}" name="user_phone" maxlength="16" /> -->
+    </view>
+  </view>
+
+</view>
+<view class='weui-cell sub-form'>
+  <view class='' bindtap='newSubscribe'>立即预约</view>
+</view>
+
+<!-- 选择服务/技师 -->
+<view class='technician' wx:if="{{ showServices }}">
+  <view class="weui-mask" id="iosMaskCancel" style='height:100%;' bindtap='exitAction'></view>
+  <view class='weui-actionsheet' id="iosActionsheet1">
+    <view class='title'>请选择服务</view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" display-multiple-items="{{displayMultipleItems}}" previous-margin="{{previousMargin}}" next-margin="{{nextMargin}}" style="height:{{imgheight}}px"
+      bindchange='swiperChange'>
+      <block wx:for="{{ service }}" wx:for-item="item" wx:for-key="key">
+        <swiper-item data-idx="{{index}}" class="swiper-item {{ current==index ? 'active' : '' }}">
+          <view class='img'>
+            <image src="{{ item.image }}" style="display: block;" class="slide-image" bindload="imageLoad" mode='aspectFill' />
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='technician_intr'>
+      <view class='name'>{{ service[current].name }}</view>
+      <view class='time'>
+          <text>
+                 <text  wx:if="{{ service[current]['time_type'] == '0'  }}">有效期：{{ service[current]['time_begin'] }}-{{ service[current]['time_end'] }}</text>
+           <text  wx:if="{{ service[current]['time_type'] == '1'  }}">有效期：购买后{{ service[current]['expire_days'] }}天内</text>
+          </text>
+      <text wx:if="{{ service[current]['name'] == '请选择技师' }}">排班时间：14：00至22：00</text>
+       </view>
+      <view class='txt' wx:if="{{ service[current]['intro'] != null }}">{{ service[current]['intro'] }}</view>
+    </view>
+    <view class='btn' bindtap='selectSub'>确认</view>
+  </view>
+</view>
+
+<!-- 选择到店时间 -->
+<view class='arrival_time' wx:if="{{timeTabel}}">
+  <view class="weui-mask" id="iosMaskCancel" style='height:100%;' bindtap='exitTimetabel'></view>
+  <view class='timetable'>
+    <view class='title'>选择到店时间</view>
+    <view class="weui-grids arrival_time">
+      <view class="weui-grid {{ dateTime.timedateIndex == 'now' ? 'active' : '' }}" bindtap='subDateTimeSelect' data-type="now"  data-timer="{{ shopTimer.now }}">
+        <view class="weui-grid__label">今天</view>
+      </view>
+      <view class="weui-grid  {{ dateTime.timedateIndex == 'tomorrow' ? 'active' : '' }}" bindtap='subDateTimeSelect'  data-type="tomorrow" data-timer="{{ shopTimer.tomorrow }}">
+        <view class="weui-grid__label">明天</view>
+      </view>
+      <view class="weui-grid {{ dateTime.timedateIndex == 'after_tomorrow' ? 'active' : '' }}" bindtap='subDateTimeSelect'  data-type="after_tomorrow"  data-timer="{{ shopTimer.after_tomorrow }}">
+        <view class="weui-grid__label">后天</view>
+      </view>
+      <view class="weui-grid {{ dateTime.timedateIndex == 'after_tomorrow_add1' ? 'active' : '' }}" bindtap='subDateTimeSelect'  data-type="after_tomorrow_add1" data-timer="{{ shopTimer.after_tomorrow_add1 }}">
+        <view class="weui-grid__label">{{ shopTimer.format_time_arr['after_tomorrow_add1'] }}</view>
+      </view>
+      <view class="weui-grid {{ dateTime.timedateIndex == 'after_tomorrow_add2' ? 'active' : '' }}" bindtap='subDateTimeSelect'  data-type="after_tomorrow_add2" data-timer="{{ shopTimer.after_tomorrow_add2 }}">
+        <view class="weui-grid__label">{{ shopTimer.format_time_arr['after_tomorrow_add2'] }}</view>
+      </view>
+      <view class="weui-grid {{ dateTime.timedateIndex == 'after_tomorrow_add3' ? 'active' : '' }}" bindtap='subDateTimeSelect' data-type="after_tomorrow_add3" data-timer="{{ shopTimer.after_tomorrow_add3 }}">
+        <view class="weui-grid__label">{{ shopTimer.format_time_arr['after_tomorrow_add3'] }}</view>
+      </view>
+    </view>
+    <view class='weui-grids arrival_hours'>
+      <block wx:for="{{ shopTimer.current_time_arr }}" wx:for-item="item" wx:for-index="index" wx:key="item">
+        <view class="weui-grid {{ !item.gtNow && dateTime.timedateIndex == 'now' ? 'overtime' : '' }} {{ dateTime.dateDetailIndex == index ? 'active' : '' }}" bindtap='subDetailTimeSelect' data-index="{{ index }}" data-timer="{{ item.time }}" data-now="{{ !item.gtNow && dateTime.timedateIndex == 'now' }}">
+          <view class="weui-grid__label">
+            <icon type="success" size="13" color="#e6be78"></icon>
+            {{ item.time }}
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='btn' bindtap='enterTimeSelect'>确认</view>
+  </view>
+</view>
+</template>

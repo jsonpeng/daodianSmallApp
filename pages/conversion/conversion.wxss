@@ -1,0 +1,2 @@
+/* pages/conversion/conversion.wxss */
+.weui-cell{font-size: 14px;color: #333;background-color: #fff;}

@@ -1,0 +1,73 @@
+/* pages/usercenter/usercenter.wxss */
+
+.weui-grid {
+  width: 25%;
+  border-right: 0;
+  border-top: 0;
+}
+
+.weui-grid__icon {
+  width: 77rpx;
+  height: 77rpx;
+}
+
+.weui-grid__icon image {
+  width: 100%;
+}
+
+.user-zone .weui-cell {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.myServices {
+  height: 75rpx;
+  line-height: 75rpx;
+}
+
+.message {
+  padding: 0 7.5px;
+  position: relative;
+}
+
+.message image {
+  width: 20px;
+  margin-left: 7.5px;
+  margin-right: 20rpx;
+}
+.message text{
+  width:18px;height: 18px;
+  line-height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: red;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  left: 25px;
+  color: #fff;
+}
+.userInfo {
+  text-align: center;
+  color: #e6be78;
+}
+
+.userInfo .weui-media-box_appmsg {
+  margin-top: -30px;
+}
+
+.userInfo .user_img {
+    width:80px;height:80px;border-radius: 50%;overflow: hidden;
+    margin: 0 auto;
+}
+.userInfo .user_img image{width:100%;display: block;}
+.userInfo .u_name {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 18px;
+}
+.userInfo .user-lever{font-size: 14px;}
+.userInfo .content{padding:0 100rpx;display: flex;justify-content: space-around;margin:5px 0;align-items: center;}
+.userInfo .content navigator{font-size: 14px;}
+.weui-media-box .weui-media-box_appmsg{position:relative;top: 0;left: 0;}
+.user-lever{}

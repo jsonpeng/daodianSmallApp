@@ -1,0 +1,29 @@
+/* pages/recharge/recharge.wxss */
+.brand{
+  padding: 60rpx 0;
+  flex-direction:column;
+   background-image:url(https://ajls3lyu.shop.qijianshen.xyz/uploads/brand.png) ; 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.brand .ft-l{font-size:22px;font-weight: bold;color: #f7e9c8;}
+.brand .ft-s{font-size: 12px;color: #e6be78;}
+.title{text-align: center;font-size: 18px;justify-content: center;}
+.recharge{display: flex;flex-wrap:wrap;justify-content: space-between;}
+.recharge-item{width:42.5vw;background-color: #fff;margin-bottom:1.5vw;border-radius: 10rpx;display: flex;flex-direction:column;align-items: center;justify-content:center;padding:20rpx 18rpx;}
+.recharge-item.active{background-color: #fff6ec;}
+.recharge-item .price{flex: 1;font-size:18px;color: #bc222c;width:100%;text-align: center;border-bottom: 1px solid #ececec;}
+.recharge-item .price text{font-size: 40px;}
+.recharge-item .intr{flex: 1;display: flex;margin-top: 20rpx;align-items:flex-start;font-size:12px;color:#9c9c9c;}
+.recharge-item .intr .pic,.give text{display: inline-block;padding:0 3.5px;border-radius: 50%;}
+/* .recharge>.recharge-item:nth-child(odd){margin-right:20rpx;} */
+.show_otherPrice{color: #e6be78;text-decoration: underline;}
+.sub-form{padding: 0;position: fixed;width: 100%;bottom: 0;}
+.sub-form view{width: 100%;height:90rpx;line-height: 90rpx;text-align: center;background-color: #e6be78;color:#fff;font-size: 16px;}
+.part2{background-color: #fff;}
+.import .weui-cell__hd,.import .weui-cell__bd{padding-bottom: 10rpx;border-bottom: 1px solid #f3f3f3;font-size: 32px;line-height: 1.5em;height: 1.5em;}
+.import .weui-cell__bd{padding-left: 20rpx;}
+.import .weui-cell__bd input{height: 100%;line-height: 100%;}
+.sub-form.payFor{padding: 0 7.5px;box-sizing: border-box;position: relative;}
+.give{font-size: 12px;color: #9c9c9c;}

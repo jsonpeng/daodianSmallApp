@@ -1,0 +1,25 @@
+<template name="default">
+  <block wx:for="{{ conversion }}" wx:key="item" wx:for-index="index">
+    <navigator class="order-item" url="order_detail?order_id={{ item.id }}">
+      <view class="order-item-title">
+        <text class="title">订单编号 {{ item.snumber }}</text>
+        <text class="status">{{ item.status }}</text>
+      </view>
+
+      <view class="zcjy-product-check" >
+        <image src="{{ item.creditsShop.image }}" data-src="{{ item.creditsShop.image }}" class="productImage" onerror="this.src= '/images/default.jpg' "></image>
+        <view class="product-name">{{ item.creditsShop.name }}</view>
+        <!-- <view class="remark">{{ items.unit }}</view> -->
+        <!-- <view class="price">
+          <text style="float: left;">¥{{ items.price }}</text>
+          <text style="float: right; margin-right: 0.75rem;">x{{ items.count }}</text>
+        </view> -->
+      </view>
+
+      <view class="weui-cell weui-cell_access " wx:if="{{ item.creditsShop.type == '礼物' }}">
+        <view class='weui-cell__bd'>查看提货二维码：</view>
+        <view class='weui-cell__ft'></view>
+      </view>
+    </navigator>
+  </block>
+</template>

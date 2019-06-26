@@ -1,0 +1,88 @@
+  <template name="default">
+  <scroll-view scroll-y="true" bindscrolltolower="pullUpLoad" style="height: {{ winHeight }}px;">
+
+    <view class="app-wrapper">
+      <view class="content-box">
+        <!--最新的-->
+        <view class="tab-item-1">
+          <view class="tab-box-1">
+
+            <block wx:for="{{ issue }}" wx:key="item" wx:for-index="index">
+              <view class="user-share-content scroll-item">
+                <view class="weui-cell">
+                  <view class="weui-cell__hd user-img">
+                    <image src="{{ item.user.head_image }}" alt="{{ item.user.head_image }}"></image>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <view class="share-name">{{ item.name }}</view>
+                    <view class="date">{{ item.humanTime }}</view>
+                  </view>
+                  <view class='weui-cell__ft' bindtap='deleteIssue'  data-index="{{ index }}" data-id="{{ item.id }}"><image class='delete' src="../../images/delete.png"  mode='widthFix'></image></view>
+                </view>
+
+                <view class="weui-cell">
+                  <view class="weui-cell__hd text">
+                    <!-- <template is="wxParse" data="{{ wxParseData:contents[index].nodes  }}"/> -->               {{ item.content }}
+                  </view>
+                </view>
+
+
+                <view class="weui-cell">
+                  <view class="pic-show-list">
+
+                    <block wx:for="{{ item.images }}" wx:key="itemimages" wx:for-item="itemimages" wx:for-index="imageindex">
+                      <view class="pic-show">
+                        <view class="img" bindtap='previewImage' data-index="{{ index }}" data-imageindex="{{ imageindex }}">
+                          <image src="{{ itemimages.url }}" alt=""></image>
+                        </view>
+                      </view>
+                    </block>
+
+                  </view>
+                </view>
+
+                <block wx:for="{{ item.products }}" wx:key="product" wx:for-item="product">
+
+                  <!--有商品规格的商品-->
+                  <navigator class="weui-cell share-link" url="../product/product?product_id={{ product.id }}" wx:if="{{ product.specs.length > 0 }}">
+                    <view class="weui-cell__hd">
+                      <image src="{{ product.image }}" alt=""></image>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <!--遍历规格信息-->
+                      <block wx:for="{{ product.specs}}" wx:key="specs" wx:for-item="specs">
+                        <text wx:if="{{ product.pivot.spec_price_id == specs.id }}">{{ specs.key_name }}</text>
+                      </block>
+                      {{ product.name }}
+                    </view>
+                  </navigator>
+
+                  <!--没有商品规格的商品-->
+                  <navigator class="weui-cell share-link" url="../product/product?product_id={{ product.id }}">
+                    <view class="weui-cell__hd">
+                      <image src="{{ product.image }}" alt=""></image>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <view class='product_name'>{{ product.name }}</view>
+                      <view class='price'>¥{{product.price}}<text>¥{{product.originalPrice}}</text></view>
+                    </view>
+                    <view class='weui-cell__ft'>
+                      <view class='btn'>去购买</view>
+                    </view>
+                  </navigator>
+                </block>
+
+              </view>
+            </block>
+
+          </view>
+          <view style="text-align: center; padding-bottom: 20px;font-size:14px;" wx:if="{{ whetherShowMore }}">
+            别扯了,没有更多了
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+  </scroll-view>
+  </template>

@@ -1,0 +1,7 @@
+.weui-cell_swiped>.weui-cell__ft{position: absolute;right:-87.5px;top: 0;bottom: 0;color: #fff;}
+.delete-swipeout{background-color: red;}
+.collect{overflow-x: hidden;}
+.weui-media-box_appmsg{display: flex;}
+.collect .order-item .weui-media-box_hd{flex: 1;}
+.collect .order-item .weui-meida-box_bd {flex: 6;}
+.collect .order-item .weui-meida-box_bd .weui-media-box_title text{font-size: 12px;color: #9c9c9c;float: right;}

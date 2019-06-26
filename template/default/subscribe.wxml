@@ -1,0 +1,84 @@
+<template name="default">
+<view class="navbar">
+  <view wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="item"
+  bindtap="navbarTap">
+    <text>{{item}}</text>
+  </view>
+</view>
+<!-- 预约列表 -->
+<view class='my_subscribe' wx:if="{{  currentTab == 1 }}">
+  <block wx:for="{{ subscribes }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+    <view class='subscribe-item'>
+      <view class='status_img'>
+          <image wx:if="{{ item.status == '已取消' }}" src='../../images/canceled.png' mode='widthFix'></image>
+          <image wx:if="{{ item.status == '已超时' }}" src='../../images/label-2.png' mode='widthFix'></image>
+      </view>
+      <view class='sub-time'>
+        <text>预约时间:{{ item.weekday }} {{ item.arrive_time }}</text>
+      </view>
+      <view class='technician'>预约技师：</view>
+      <view class='technican-info weui-cell'>
+        <view class='weui-cell__hd'>
+          <image class='store-pic' src='{{ item.technician.image }}' mode='widthFix'></image>
+        </view>
+        <view class='weui-cell__bd'>
+          <view class='technician-name'>{{ item.technician.name }}</view>
+          <view class='technician-intr'>{{ item.technician.intro }}</view>
+        </view>
+      </view>
+      <view class='line' style='box-sizing:border-box;margin:5px 7.5px;border-bottom:1px solid #ececec;'></view>
+      <view class='technician'>预约门店：</view>
+      <view class='store-info weui-cell' bindtap='openMap' data-jindu="{{ item.shop.jindu }}" data-weidu="{{  item.shop.weidu }}">
+        <view class='weui-cell__hd'>
+          <image class='store-pic' src='{{ item.shop.logo }}' mode='widthFix'></image>
+          <image class='location' src='../../images/location.png' mode='widthFix'></image>
+        </view>
+        <view class='weui-cell__bd'>
+          <view class='store-name'>{{ item.shop.name }}</view>
+          <view class='store-add'>{{ item.shop.address }}</view>
+        </view>
+      </view>
+      <view class='btn-list weui-cell'>
+        <view bindtap='openMap' data-jindu="{{ item.shop.jindu }}" data-weidu="{{  item.shop.weidu }}">
+          <image src='../../images/line.png' mode='widthFix' ></image>到这里去</view>
+        <view data-tel="{{ item.shop.tel }}" bindtap='phone'>
+          <image  src='../../images/phone.png' mode='widthFix'></image>拨打电话</view>
+        <view wx:if="{{ item.status == '待分配' }}" data-id="{{ item.id }}" bindtap='cancleSub'>
+          <image src='../../images/sand.png' mode='widthFix'></image>取消预约</view>
+      </view>
+    </view>
+  </block>
+</view>
+
+
+<!-- 技术列表 -->
+<view wx:if="{{ currentTab == 0 }}">
+  <view class='box'>
+  <block wx:for="{{technicicans}}" wx:for-item="item" wx:key="item" wx:for-index="index">
+  <navigator class="technician_list weui-cell" url='../technician_intr/technician_intr?technician_id={{item.id}}'>
+      <view class='weui-cell__hd'>
+          <view class='via'>
+              <image src='{{item.image}}' mode='scaleToFill'></image>
+          </view>
+          <view class='add'><image class='locaiton' src='../../images/location.png' mode='widthFix'></image>{{shop_add}}</view>
+      </view>
+      <view class='weui-cell__bd'>
+          <view class='name'>{{item.name}}<text>{{item.job}}</text></view>
+
+          <view class='intr' wx:if="{{ item.intro !=null }}">{{ item.intro }}</view>
+          <view class='contact'>
+              <view class='tel'>
+                  <image class='phone' src='../../images/tel.png' mode='widthFix'></image><text>TEL:{{ item.mobile }}</text>
+              </view>
+              <view class='praise'><image src='../../images/zan.png' mode='widthFix'></image><text>{{ item.give_like }}</text></view>
+
+          </view>
+      </view>
+  </navigator>
+  </block>  
+  </view>
+
+</view>
+</template>
+
+

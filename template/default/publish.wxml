@@ -1,0 +1,100 @@
+<template name="default">
+  <view class='weui-cell head'>
+    <view class='weui-cell__bd' bindtap='backTo'>取消</view>
+    <view class='weui-cell__ft' bindtap='publishPosts'>发表</view>
+  </view>
+  <view class='weui-cell text'>
+    <view class='weui-cell__bd'>
+      <textarea placeholder='此刻想要分享的...' bindinput='contentInput'  placeholder-style='color:#9c9c9c;font-size:12px;'>{{ content }}</textarea>
+    </view>
+  </view>
+  <view class='weui-cell'>
+    <view class="weui-cell__bd">
+      <view class="weui-uploader">
+        <view class="weui-uploader__hd">
+          <view class="weui-uploader__title">图片上传</view>
+          <view class="weui-uploader__info">{{post_images.length}}/6</view>
+        </view>
+        <view class="weui-uploader__bd">
+          <view class="weui-uploader__files" id="uploaderFiles">
+            <block wx:for="{{ post_images }}" wx:key="*this" wx:for-index="index">
+              <view class="weui-uploader__file" bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap="previewImage" bindlongtap='delImage' data-index="{{ index }}" id="{{item}}">
+                <image class="weui-uploader__img" src="{{ item }}" mode="aspectFill" />
+              </view>
+            </block>
+            <view class="weui-uploader__file" wx:if="{{ post_images.length == 0 }}">
+              <image class="weui-uploader__img" src="../../images/camera.jpg" mode="aspectFill" />
+            </view>
+          </view>
+          <view class="weui-uploader__input-box" wx:if="{{ post_images.length < 6  }}">
+            <view class="weui-uploader__input" bindtap="chooseImageTap" ></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='chooseProduct weui-cell weui-cell_access' bindtap='showList'>
+    <view class='weui-cell__bd'>选择关联商品</view>
+    <view class='weui-cell__ft'></view>
+  </view>
+  <!-- 关联商品列表 -->
+  <block wx:for="{{ selected_product }}" wx:key="product" wx:for-item="product" wx:for-index="index">
+
+    <!--没有商品规格的商品-->
+    <view class="weui-cell share-link" >
+      <view class="weui-cell__hd">
+        <image src="{{ product.image }}" alt=""></image>
+      </view>
+      <view class="weui-cell__bd">
+        {{ product.name }}
+      </view>
+    </view>
+  </block>
+  <!-- 选择关联商品弹窗 -->
+  <view class='technician' wx:if="{{cancel_status}}">
+    <view class="weui-mask" id="iosMaskCancel" style='height:100%;' bindtap='exitAction'></view>
+    <view class='weui-actionsheet' id="iosActionsheet1">
+      <view class='title'>请选择关联商品</view>
+      <!-- 服务内容切换 -->
+      <view class="services">
+        <view class="weui-tab">
+          <view class="weui-navbar">
+            <view class="weui-navbar__item {{ productTab==-1?'weui-bar__item_on':'' }}" bindtap='switchTab' data-id="-1" data-index="-1">
+              <text>全部</text>
+            </view>
+            <block wx:for="{{ cats }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+              <view class="weui-navbar__item {{ productTab==index?'weui-bar__item_on':'' }}" bindtap='switchTab' data-id="{{ item.id }}" data-index="{{ index }}">
+                <text>{{ item.name }}</text>
+              </view>
+            </block>
+          </view>
+          <view class="weui-tab__panel product-wrapper">
+            <block wx:for="{{ products }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+              <template is="product_list" data="{{ item }}"> </template>
+            </block>
+          </view>
+        </view>
+      </view>
+      <scroll-view scroll-y="true" bindscrolltolower="pullUpLoad" style="height: 300px;">
+        <block wx:for="{{ products }}" wx:key="item" wx:for-index="index1">
+
+          <view class="order-item  {{ item.selected ? 'active' : '' }}" data-index="{{ index1 }}" bindtap='selectProducts' >
+            <view class="zcjy-product-check">
+              <image src="{{ item.image }}" data-src="{{ item.image }}" class="productImage" onerror="this.src= '/images/default.jpg' "></image>
+              <view class="product-name">{{ item.name }}</view>
+              <view class="remark">{{ item.unit }}</view>
+              <view class="price">
+                <view style="float: left;">¥{{ item.price }}
+                  <text>门市价{{ item.market_price }}</text>
+                </view>
+                <view style="float: right; margin-right: 0.75rem;">已售：{{ item.sales_count }}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ whetherShowMore }}">别再扯了，已经没有了</view>
+      </scroll-view>
+      <view class='btn' bindtap='enterProduct'>确认</view>
+    </view>
+  </view>
+</template>

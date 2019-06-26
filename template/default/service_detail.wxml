@@ -1,0 +1,13 @@
+<template name="default">
+  <view class='weui-cell'>
+    <view class='weui-cell__bd program'>
+      <view class='qrCode'>
+        <image src='{{qrcode_l}}' mode='widthFix'></image>
+      </view>
+      <view class='name'>{{servie.service.name}}</view>
+      <view class='date'>有效期：{{servie.time_begin}}至{{servie.time_end}}</view>
+      <view class='times'>次数：×{{servie.num}}</view>
+      <view class='text'>{{servie.service.intro}}</view>
+    </view>
+  </view>
+</template>

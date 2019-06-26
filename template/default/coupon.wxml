@@ -1,0 +1,52 @@
+<template name="default">
+  <view class="navbar">
+    <view wx:for="{{navbar}}" data-idx="{{index-1}}" data-id="{{item.id}}" class="item {{couponsTab==index-1 ? 'active' : ''}}" wx:key="item" wx:for-index="index" bindtap="switchTab">
+      <text>{{item}}</text>
+    </view>
+  </view>
+
+
+  <view class="weui-tab__panel discount">
+
+    <block wx:for="{{ coupons }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+      <view class="weui_planel_item ">
+        <view class="slide-toggle" wx:if="{{ item.status==3 }}">
+          <image src="../../images/guoqi.png" alt=""></image>
+        </view>
+        <view class="slide-toggle" wx:if="{{ item.status==2 }}">
+          <image src="../../images/used.png" alt=""></image>
+        </view>
+
+        <view class="weui-panel_bd">
+          <view bindtap='actionOpen' data-index="{{ index }}" data-status="{{ !item.status_state}}" class="weui-media-box weui-media-box_appmsg" >
+
+            <view class="weui-media-box_hd" wx:if="{{ item.coupon.type=='打折' }}" style='color:{{maincolor}}'>
+              <view class="type" style='color:{{maincolor}};border-color:{{maincolor}}'>折扣券</view>
+              <view class="sum" style='color:{{maincolor}}'>
+                <text>{{item.coupon.discount*0.1}}</text>折</view>
+            </view>
+
+            <view class="weui-media-box_hd" wx:if="{{ item.coupon.type=='满减' }}" style='color:{{maincolor}}'>
+              <view class="type" style='color:{{maincolor}};border-color:{{maincolor}}'>满减券</view>
+              <view class="sum" style='color:{{maincolor}}'>
+                <text>{{ item.coupon.given }}</text>元</view>
+            </view>
+            <view class="weui-media-box cut_line">
+              <view class="border"></view>
+              <view class="weui-cell-fl"></view>
+              <view class="weui-cell-fr"></view>
+            </view>
+            <view class="weui-media-box_bd">
+              <view class="weui-media-box_title" wx:if="{{ item.coupon.range==0 }}">满{{ item.coupon.base }}元可用,全场通用</view>
+              <view class="weui-media-box_title" wx:if="{{ item.coupon.range==1 }}">满{{ item.coupon.base }}元可用,指定分类</view>
+              <view class="weui-media-box_title" wx:if="{{ item.coupon.range==2 }}">满{{ item.coupon.base }}元可用,指定商品</view>
+              <view class="weui-media-box_title" wx:if="{{ item.coupon.time_type==0}}">使用有效期：{{ item.time_begin }}-{{ item.time_end }}</view>
+              <view class="weui-media-box_desc" wx:if="{{ item.coupon.time_type!=0}}">使用有效期：领券后{{ item.coupon.expire_days }}天</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+</template>

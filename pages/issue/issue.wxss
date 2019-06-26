@@ -1,0 +1,6 @@
+/* pages/issue/issue.wxss */
+.delete{width:45rpx;}
+.price{font-size: 16px;color: #bc222c;}
+.price text{font-size: 12px;color:#9c9c9c;text-decoration: line-through;margin-left: 10rpx;}
+.user-share-content .share-link{display: flex;align-items: center;padding-left: 10rpx;}
+.btn{font-size: 14px;padding:0 10rpx;color:#bc222c;border: 1px solid #bc222c;border-radius:30rpx;margin-right: 30rpx;}

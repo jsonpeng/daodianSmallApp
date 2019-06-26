@@ -1,0 +1,4 @@
+<import src="../../template/default/addSubscribe.wxml"  />
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>

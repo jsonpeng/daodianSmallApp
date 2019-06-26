@@ -1,0 +1,80 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/found/found",
+    "pages/usercenter/usercenter",
+    "pages/product/product",
+    "pages/subscribe/subscribe",
+    "pages/subscribe/addSubscribe",
+    "pages/store_list/store_list",
+    "pages/store_detail/store_detail",
+    "pages/usercenter/card",
+    "pages/usercenter/credits",
+    "pages/product/product_detail",
+    "pages/myserve/myserve",
+    "pages/privilege/privilege",
+    "pages/recharge/recharge",
+    "pages/orders/orders",
+    "pages/credits_mall/credits_mall",
+    "pages/usercenter/balance",
+    "pages/conversion/conversion",
+    "pages/issue/issue",
+    "pages/usercenter/coupon",
+    "pages/pay/pay",
+    "pages/pay/checkout",
+    "pages/message/message",
+    "pages/test/rili",
+    "pages/news/news",
+    "pages/publish/publish",
+    "pages/admin/index",
+    "pages/admin/card",
+    "pages/technician_intr/technician_intr",
+    "pages/service_detail/service_deatil"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 20
+  },
+  "tabBar": {
+    "color": "#969696",
+    "selectedColor": "#e6be78",
+    "borderStyle": "white",
+    "backgroundColor": "#121116",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/default1.png",
+        "selectedIconPath": "/images/t1.png"
+      },
+      {
+        "pagePath": "pages/found/found",
+        "text": "发现",
+        "iconPath": "/images/default2.png",
+        "selectedIconPath": "/images/t2.png"
+      },
+      {
+        "pagePath": "pages/subscribe/subscribe",
+        "text": "预约",
+        "iconPath": "/images/default3.png",
+        "selectedIconPath": "/images/t3.png"
+      },
+      {
+        "pagePath": "pages/usercenter/usercenter",
+        "text": "个人中心",
+        "iconPath": "/images/default4.png",
+        "selectedIconPath": "/images/t4.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "connectSocket": 20000,
+    "uploadFile": 20000,
+    "downloadFile": 20000
+  }
+}

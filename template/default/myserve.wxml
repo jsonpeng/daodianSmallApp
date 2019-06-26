@@ -1,0 +1,62 @@
+<template name="default">
+<view class="navbar">
+  <view wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="item"
+  bindtap="navbarTap">
+    <view>{{item}}</view>
+  </view>
+</view>
+<view class="serve-items">
+
+<block wx:for="{{ serives }}" wx:key="item" wx:for-index="index">
+
+  <!-- 待使用 -->
+  <view class="serve-item" wx:if="{{ item.status == '待使用' }}">
+    <view class="serve-name">{{ item.service.name }}</view>
+    <view class="serve-last">
+      <view class="last-time">剩余次数:<text>{{ item.num }}</text>次</view>
+      <navigator url="../service_detail/service_deatil?serviceId={{item.id}}" class="erweima" data-qrcode="{{ item.qrcode_l }}" bindtap='watchQrcod' data-id="{{ item.id }}">
+        <image src="../../images/erweima1.png"></image>
+      </navigator>
+    </view>
+    <view class="serve-state">
+      <view class="serve-life">使用期限：{{ item.time_begin }}至{{ item.time_end }}</view>
+      <view class="serve-shop">适用门店：<text wx:for="{{ item.shops }}" wx:for-item="shops"  wx:for-index="sindex" wx:key="shops">{{ shops.name }}<text wx:if="{{ item.shops.length > 1 }}">、</text></text></view>
+    </view>
+  </view>
+
+  <!-- 已使用 -->
+  <view class="serve-item" wx:if="{{ item.status == '已使用' }}">
+    <view class="serve-name">{{ item.service.name }}</view>
+    <view class="serve-last">
+      <view class="use-info">
+         <view>使用日期 :<text>{{ item.use_time }}</text></view>
+        <view>使用门店 :<text>{{ item.use_shop }}</text></view> 
+        <image src="../../images/label-1.png" class="status-use"></image>
+      </view>
+    </view>
+    <view class="serve-state">
+      <view class="serve-life">使用期限：{{ item.time_begin }}至{{ item.time_end }}</view>
+      <view class="serve-shop">适用门店：<text wx:for="{{ item.shops }}" wx:for-item="shops"  wx:for-index="sindex" wx:key="shops">{{ shops.name }}<text wx:if="{{ item.shops.length > 1 }}">、</text></text></view>
+    </view>
+  </view>
+
+  <!-- 已过期 -->
+  <view class="serve-item"  wx:if="{{ item.status == '已过期' }}">
+    <view class="serve-name">{{ item.service.name }}</view>
+    <view class="serve-last">
+      <view class="use-info"> 
+        <view style="opacity:0"> 1</view>
+        <view>剩余次数 :<text>{{ item.num }}次</text></view>
+        <image src="../../images/label-2.png" class="status-use"></image>
+      </view>
+    </view>
+    <view class="serve-state">
+      <view class="serve-life">使用期限：{{ item.time_begin }}至{{ item.time_end }}</view>
+      <view class="serve-shop">适用门店：<text wx:for="{{ item.shops }}" wx:for-item="shops"  wx:for-index="sindex" wx:key="shops">{{ shops.name }}<text wx:if="{{ item.shops.length > 1 }}">、</text></text></view>
+    </view>
+  </view>
+
+</block>
+</view>
+</template>
+

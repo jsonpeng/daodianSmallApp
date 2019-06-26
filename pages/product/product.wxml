@@ -1,0 +1,4 @@
+<import src="../../template/default/product.wxml"  />
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>

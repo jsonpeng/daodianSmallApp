@@ -1,0 +1,5 @@
+<import src="../../template/default/admin/index.wxml"  />
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>
+

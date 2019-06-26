@@ -1,0 +1,4 @@
+<template name="default">
+<!--pages/admin/index.wxml-->
+<text>会员卡页</text>
+</template>

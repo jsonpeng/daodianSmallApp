@@ -1,0 +1,28 @@
+<template name="default">
+<view class='weui-cell title'>
+    <view class='weui-cell__bd'>可用积分：</view>
+    <view class='weui-cell__ft'> <image src='../../images/tip_default.png' mode='widthFix'></image> 积分说明</view>
+</view>
+<view class='weui-cell credits' >{{ myself.user.credits }}</view>
+<view class='weui-cell sub-form'>
+  <view class=''>获取积分</view>
+</view>
+<view class='weui-cell change'>积分变动</view>
+
+<block wx:for="{{ credits }}" wx:for-item="item" wx:key="item">
+<view class='weui-cell credits-item'>
+    <view class='weui-cell__hd'>
+        <view class='ft-l'>{{ item.weekday }}</view>
+        <view class='ft-s'>{{ item.date }}</view>
+    </view>
+    <view class='weui-cell__bd'>
+        <image src='../../images/right.png' mode='widthFix'></image>
+        <view class='contents'>
+            <view class='num'>{{ item.change > 0 ? '+' + item.change :  item.change }}</view>
+            <view class='state'>{{ item.detail }}</view>
+        </view>
+    </view>
+</view>
+</block>
+
+</template>

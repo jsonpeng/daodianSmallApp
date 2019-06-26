@@ -1,0 +1,5 @@
+<import src="../../template/default/store_list.wxml"  />
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>
+

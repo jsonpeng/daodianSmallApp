@@ -1,0 +1,202 @@
+/* page/index/index.wxss */
+.weui-search-bar{padding: 0;width: 100%;background-color: #fff;border-bottom: 0;border-top: 0;}
+.weui-search-bar__cancel-btn{color:#9c9c9c;}
+.weui-search-bar__form{border: 1rpx solid #e6be78;border-radius:3px;}
+.serchBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  position: relative;
+}
+
+.serchBar .weui-cell__hd {
+  display: flex;
+  align-items: center;
+}
+
+.serchBar .weui-cell__hd navigator {
+  max-width: 6em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  color: #e6be78;
+  margin:0 5px;
+}
+
+.serchBar .location {
+  width: 15px;
+}
+
+.serchBar .down {
+  width: 15px;
+}
+
+.serchBar .weui-cell__bd {
+  height:30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  margin:0 7.5px;
+}
+
+.serchBar input {
+  display: inline-block;
+}
+
+.serchBar .message {
+  width: 25px;
+}
+
+.serchBar navigator {
+  display:block;
+}
+
+.serchBar .weui-cell__ft {
+  text-align: right;
+  position: relative;
+}
+.serchBar .weui-cell__ft text{
+  width:18px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: red;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  color: #fff;
+}
+#searchResult{position: absolute;top:45px;left: 0;width: 100%;margin:0 auto;padding: 0 7.5px;box-sizing: border-box;background-color:#fff;}
+#searchResult navigator{display:block;width: 100%;padding-left:45px;line-height:30px;box-sizing: border-box;padding-right: 45px;}
+#searchResult navigator text{display: inline-block;width: 100%;border-bottom: 1px solid #e5e5e5;font-size: 14px;color: #666;}
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    width: 100%;
+}
+.searchbar-result:before{
+    display: none;
+}
+.searchbar-result navigator{border-bottom: 1px solid #e5e5e5;}
+/* 轮播广告 */
+
+.banner navigator image {
+  display: block;
+  width: 100%;
+}
+
+/*
+ 热门消息
+ */
+
+.notice {
+  padding: 12.5px 7.5px;
+  background-color: #fff;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.notice .weui-cell__hd {
+  display: flex;
+  align-items: center;
+}
+
+.notice image {
+  width: 20px;
+  margin-right: 5px;
+}
+.tempWrap swiper{height:24px;}
+/* 店铺信息 */
+
+.store_info {
+  background-color: #fff;
+}
+
+.store_info .weui-cell__hd {
+  width: 72px;
+  height: 0px;
+  padding-bottom: 72px;
+  position: relative;
+}
+
+.store_info .weui-cell__bd {
+  padding-left: 16px;
+}
+
+.store_info .store_name, .store_info .locaiton {
+  display: block;
+  text-align: left;
+}
+
+.store_info .store_name {
+  font-size: 15px;
+}
+
+.store_info .locaiton {
+  font-size: 14px;
+  color: #9c9c9c;
+}
+
+.store_info image {
+  width: 100%;
+  position: absolute;
+  left: 0;
+}
+
+/* 地址 */
+
+.add {
+  border-top: 1px solid #f5f5f5;
+  background-color: #fff;
+  margin-bottom: 5px;
+}
+
+.add .weui-cell__bd {
+  flex: 1;
+  color: #9c9c9c;
+}
+
+.add .weui-cell__ft {
+  display: flex;
+  align-items: center;
+}
+
+.add .weui-cell__ft text {
+  height: 20px;
+  border-right: 1px solid #e6be78;
+  color: #e6be78;
+  margin: 0 20px;
+}
+
+.add .weui-cell__ft .path {
+  width: 15px;
+}
+
+.add .weui-cell__ft .call {
+  width: 25px;
+}
+
+/* 板块导航 */
+.weui-grids.index-function-grids{border: 0;margin-bottom: 5px;padding:10px 0;}
+.weui-grid {
+  width: 25%;
+  border-right: 0;
+  border-bottom: 0;
+}
+.weui-grid image{width:100%;display:block; }
+/* 服务选择 */
+.services .product-wrapper{background-color:#f5f5f5;}
+.services .product-wrapper .product-item2{background-color:#fff;padding:5px;}
+.services .weui-bar__item_on{color:#e6be78;}
+.services .weui-bar__item_on text{border-bottom: 1px solid #e6be78;}
+ .services .weui-navbar__item{padding:0;display: block;} 
+.services .weui-navbar__item text{padding:13px 0;} 
+.services .weui-navbar{border-bottom:0;margin-bottom: 5px;display: flex;align-items: center;background-color: #fff;}

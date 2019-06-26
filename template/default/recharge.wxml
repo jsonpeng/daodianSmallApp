@@ -1,0 +1,42 @@
+<template name="default">
+<view class='brand weui-cell'>
+  <view class='ft-l'>充值送好礼</view>
+  <view class='ft-s'>充值即送余额,还有积分和优惠哦~</view>
+</view>
+<view class='part1' wx:if='{{ifhaschoose}}'>
+  <view class='title weui-cell'>选择充值金额</view>
+  <view class='recharge weui-cell'>
+    <block wx:for="{{topup_list}}" wx:key="item" wx:for-item="item" wx:for-index="index">
+    <view class="recharge-item {{currutId==index?'active':''}}" bindtap='selected' data-index="{{ index }}">
+      <view class='price'>¥
+        <text>{{item.price}}</text>
+      </view>
+      <view class='intr'>
+        <view class='pic' style='font-size:12px;color:#e6be78;background-color:#fff6ec;'>送</view>
+        <view class='text'>
+          <view>{{item.give_balance}}元余额，{{item.give_credits}}积分</view>
+          <view wx:if="{{item.coupon.name=='满减券'}}">满{{item.coupon.base}}减{{item.coupon.given}}元优惠券</view>
+          <view wx:if="{{item.coupon.name=='折扣券'}}">满{{item.coupon.base}}打{{item.coupon.discount*0.1}}折优惠券</view>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+  <view class='weui-cell show_otherPrice'  bindtap='otherPrice'>其他充值金额</view>
+  <view class='weui-cell sub-form' url='../recharge/recharge'>
+    <view class='' bindtap='payFor'>立即付款</view>
+  </view>
+</view>
+
+<view class='part2' wx:if='{{!ifhaschoose}}'>
+    <view class='title weui-cell'>输入充值金额</view>
+  <view class='import weui-cell'>
+    <view class='weui-cell__hd'>¥</view>
+    <view class='weui-cell__bd'><input bindinput='checkNum'></input></view>
+  </view>
+  <view class='give weui-cell' wx:if="{{ charge != '' &&  free != null }}"><text style='background-color:#fff6ec;'>送</text>{{free.give_balance}}元余额 {{free.give_credits}}积分 {{free.item.coupon.name=='满减券'?free.coupon.given+'元':free.coupon.discount*0.1+'折'}}优惠券</view>
+  <view class='weui-cell sub-form payFor' url='../recharge/recharge'>
+    <view class='' bindtap='charge'>立即充值</view>
+  </view>
+</view>
+</template>

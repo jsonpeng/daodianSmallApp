@@ -1,0 +1,49 @@
+<template name="default">
+<view class='user-info weui-cell'>
+  <view class='card'>
+    <view class='tip'>
+      <image src='../../images/tip.png' mode='widthFix'></image>如何获得成长值</view>
+    <view class='portrait'>
+      <image src='{{ myself.user.head_image }}' mode='widthFix'></image>
+    </view>
+    <view class='name'>尊敬的：
+      <text>{{ myself.user.name }}</text>
+    </view>
+    <view class='name'>{{myself.userLevel.name}}</view>
+    <view class='growth_value'>{{ myself.user.growth }}
+      <text wx:if="{{ myself.nextUserLevel != null }}">/{{ myself.nextUserLevel.growth }}</text>
+    </view>
+    <!-- <view class="weui-progress">
+      <view class="weui-progress__bar">
+        <progress percent="50" stroke-width="3" />
+      </view>
+    </view> -->
+    <progress wx:if="{{ myself.nextUserLevel != null }}" percent="{{ myself.user.growth/myself.nextUserLevel.growth*100 }}" active style='border-radius:100px;overflow:hidden;border:1px solid #e6be78;' activeColor='#e6be78' backgroundColor='transparent' stroke-style='border-radius:100px;' stroke-width="3" />
+    <view class='vip' wx:if="{{ myself.nextUserLevel != null }}">
+      <image src='../../images/vip.png' mode='widthFix'></image>再获取{{ myself.nextUserLevel.growth -  myself.user.growth }}成长值升级为{{ myself.nextUserLevel.name }}</view>
+  </view>
+</view>
+<view class='weui-cell  weui-cell_access title'>
+  <view class='weui-cell__bd'>我的特权</view>
+  <navigator class='weui-cell__ft' url='../privilege/privilege'>查看全部特权</navigator>
+</view>
+<view class='line'></view>
+<view class='weui-cell privilege'>
+  <view class='p-item'>
+    <image src='../../images/gift.png' mode='widthFix'></image>
+    <view class=''>会员{{ myself.userLevel.discount/10 }}折</view>
+  </view>
+  <!-- <view class='p-item'>
+    <image src='../../images/jifen.png' mode='widthFix'></image>
+    <view class=''>积分换礼品</view>
+  </view> -->
+  <view class='p-item next-level' wx:if="{{ myself.nextUserLevel != null }}">
+    <image src='../../images/lock.png' mode='widthFix'></image>
+    <view class=''>下一等级{{ myself.nextUserLevel.discount/10 }}折</view>
+  </view>
+</view>
+
+<navigator wx:if="{{myself.nextUserLevel.length !==0 }}" url='../recharge/recharge' class='weui-cell sub-form'>
+  <view class=''>{{ myself.nextUserLevel == null ? '我要充值' : '升级会员' }}</view>
+</navigator>
+</template>

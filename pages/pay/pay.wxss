@@ -1,0 +1,108 @@
+/* pages/pay/pay.wxss */
+.list{padding: 10rpx 7.5px;}
+.weui-cell{background-color: #fff;padding:25rpx 10rpx;margin:10rpx 0;}
+.weui-cell_access{margin-bottom:10rpx;}
+.intr{font-size: 14px;color: #9c9c9c;padding:15rpx 0;}
+.balance-pay{margin-bottom: 10rpx;}
+.balance-pay .weui-cell__ft,.balance-pay .weui-cell__ft .counter{display: flex;align-items: center;}
+.btn{position: fixed;bottom: 0;width: 100%;display: flex;align-items: center;height: 100rpx;line-height: 100rpx;}
+.btn .price{flex: 6;font-size: 14px;padding:0 10rpx;background-color: #fff;}
+.btn .price text{display:inline-flex;font-size: 22px;color: #bc222c;margin:0 10rpx;}
+.btn .pay_now{flex: 4;text-align: center;background-color:#e6be78;color: #fff;font-size: 18px; }
+.money,input{font-size:20px;color: #bc222c;}
+.placeholder{font-size: 14px;}
+image{width:30rpx;margin-right: 10rpx;}
+.weui-cell__bd{display: flex;align-items: center;min-width: 12em;}
+.weui-mask{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.6);
+}
+.weui-actionsheet_toggle{
+  transform: translate(0);
+}
+.weui-actionsheet{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    backface-visibility: hidden;
+    z-index: 5000;
+    width: 100%;
+    background-color: #efeff4;
+    transition: transform .3s,-webkit-transform .3s;
+}
+.weui-actionsheet__title{
+  font-size: 14px;
+  position: relative;
+    height: 65px;
+    padding: 0 20px;
+    line-height: 1.4;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    color: #888;
+    background: #fff;
+}
+.weui-actionsheet__title:before{
+      content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+}
+.weui-actionsheet__menu{
+  max-height: 500px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+.weui-actionsheet__cell.coupon-cell{
+    text-align: left;
+    padding: 0.75rem;
+    font-size: 0.45rem;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+.weui-actionsheet__cell.coupon-cell .price{
+    font-size: 16px;
+    color: #ff4e44;
+}
+.weui-actionsheet__cell.coupon-cell .des,.weui-actionsheet__cell.coupon-cell .time-range{
+    font-size: 12px;
+    color: #999;
+}
+.weui-actionsheet__cell.coupon-cell .usecoupon{
+    position: absolute;
+    font-size: 14px;
+    color: #ff4e44;
+    padding: 2.5px 10px;
+    display: inline-block;
+    border: 1px solid;
+    right: 0.75rem;
+    top: 1.325rem;
+    border-radius: 2.5px;
+}
+.weui-actionsheet__action{
+    margin-top: 6px;
+    background-color: #fff;
+}
+.weui-actionsheet__cell{
+  position: relative;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 16px;
+}

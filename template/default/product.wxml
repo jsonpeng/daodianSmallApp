@@ -1,0 +1,146 @@
+<import src="../../wxParse/wxParse.wxml" />
+<template name="default">
+<view class="yishu-index-swiper">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style="height:{{imgheight}}px">
+    <block wx:for="{{ products.images !=='undifined'?products.images : credits_product.image }}" wx:key="item">
+      <swiper-item>
+        <image class="img" style="display: block;" bindload="imageLoad" src="{{ item.url }}" data-src="{{item.url}}" mode="widthFix" />
+      </swiper-item>
+    </block>
+      <swiper-item wx:if="{{products.images.length==0||credits_product.image.length==0}}">
+        <image class="img" style="display: block;" bindload="imageLoad" src="{{ products.product.image }}" data-src="{{item.url}}" mode="widthFix" />
+      </swiper-item>
+  </swiper>
+</view>
+
+<view class='weui-cells product-info'>
+  <view class='weui-cell'>
+    <view class='weui-cell__bd name'>{{ products.product.name || credits_product.name}}</view>
+  </view>
+  <!--普通产品-->
+  <view class='weui-cell' wx:if="{{ types == 'product' }}">
+    <view class='weui-cell__hd price'>
+      <text wx:if="{{products.product.realPrice}}">{{ products.product.realPrice }}</text>元</view>
+    <view class='weui-cell__bd last-price'>{{ products.product.price }}元</view>
+    <view class='weui-cell__ft hasSale'>已售{{ products.product.sales_count || credits_product.count_time}}</view>
+  </view>
+
+  <!--积分产品-->
+   <view class='weui-cell' wx:if="{{ types == 'credit' }}">
+      <view class='weui-cell__hd price'>
+        <text >兑换积分{{ credits_product.need_num }}</text>
+      </view>
+    <view class='weui-cell__ft hasSale'>人气{{ credits_product.count_time}}</view>
+  </view>
+
+  
+  <navigator url='../privilege/privilege' class='weui-cell privilege' wx:if="{{ myself.userLevel.name != '普通会员' }}">
+    <view class='weui-cell__bd'>
+      <image class='vip' src='../../images/v.png' mode='widthFix'></image>{{ myself.userLevel.name }}享折上{{ myself.userLevel.discount/10 }}折</view>
+    <view class='weui-cell__ft'>更多会员特权</view>
+  </navigator>
+</view>
+<!-- <navigator class='weui-cell store-list weui-cell_access' url='../store_list/store_list?product_id={{products.product.id}}'>
+  <view class='weui-cell__bd'>适用门店（{{ products.shops.length }}）</view>
+  <view class='weui-cell__ft'></view>
+</navigator> -->
+
+<navigator url='../store_detail/store_detail?index={{ shop_tab }}' class='weui-cell weui-cell_access store_info' wx:if="{{ shop_tab !==''}}">
+  <view class='weui-cell__hd'>
+    <image src="{{ shops[shop_tab]['logo'] }}" mode='widthFix'></image>
+  </view>
+  <view class='weui-cell__bd'>
+    <view class="store_name">{{ shops[shop_tab]['name'] }}</view>
+    <view class="locaiton"><text wx:if="{{ shops[shop_tab]['distance'] > 1 }}"> {{ shops[shop_tab]['distance'] }} km </text> <text wx:else> {{ shops[shop_tab]['distance']*1000 }} m </text> <text wx:if="{{ shops[shop_tab]['min'] == true }}">离我最近</text> </view>
+  </view>
+  <view class='weui-cell__ft'></view>
+</navigator>
+
+<view class='weui-cells programs'>
+
+  <block wx:for="{{ products.services }}" wx:for-item="service" wx:key="service">
+      <view class='weui-cell program'>
+        <view class='weui-cell__bd'>
+          <view class='name'>{{ service.name }}</view>
+          <view class='date' wx:if="{{ service.time_type == '0'  }}">有效期：{{ service.time_begin }}-{{ service.time_end }}</view>
+           <view class='date' wx:if="{{ service.time_type == '1'  }}">有效期：购买后{{ service.expire_days }}天内</view>
+          <view class='times'>次数：×{{ service.pivot.num }}</view>
+          <view class='text' wx:if="{{  service.intro != null }}">{{ service.intro }}</view>
+        </view>
+      </view>
+  </block>
+
+  <view class='btn'>
+    <navigator url='product_detail?product_id={{products.product.id}}' class='seen-more'>查看图文详情</navigator>
+  </view>
+</view>
+
+<view class="checkwrapper product-checker">
+  <navigator class="home checker-left-item" url="../index/index" open-type="switchTab">
+    <view class="image">
+      <image src="../../images/home.png" alt=""></image>
+    </view>
+    <view class="name">首页</view>
+  </navigator>
+  <view class='bar' style='height:30px;border-left:1px solid #89888b;background-color:#121116;'></view>
+  <view class="home checker-left-item" bindtap="show">
+    <view class="image">
+      <image src="../../images/share.png" alt=""></image>
+    </view>
+    <view class="name">分享</view>
+  </view>
+
+  <navigator wx:if="{{ types == 'product' }}" url='../pay/checkout' class="right-botton01" bindtap='show' style='background-color:#e6be78;'>立即抢购</navigator>
+
+  <view wx:if="{{ types == 'credit' }}"  class="right-botton01" bindtap='creditDuiHuan' style='background-color:#e6be78;'>立即兑换</view>
+
+</view>
+
+<!-- 图文详情 -->
+<view class='title weui-cell' hidden='{{flag1}}'>
+  <!-- <view class='title'>介绍</view>
+  <view class='name'>商品名称</view>
+  <view class='pic'>
+    <image mode='widthFix' src='../../images/products.jpg'></image>
+  </view>
+  <view class='line'></view>
+  <view class='t-head'>套餐详情</view>
+  <view class='weui-cell program'>
+    <view class='weui-cell__bd'>
+      <view class='name'>项目名称</view>
+      <view class='date'>有效期：购买后有效期</view>
+      <view class='times'>次数：×1</view>
+      <view class='text'>服务内容服务内容</view>
+    </view>
+  </view> -->
+   <!-- <template is="wxParse" data="{{ wxParseData:contents.nodes  }}" /> -->
+</view>
+
+<!-- 分享二维码弹出 -->
+  <view class="item-mask" wx:if="{{ flag }}" style='height:100%;'>
+    <view class="item-mark2" catchtap='hide'></view>
+    <view class="chooseDimension" catchtap='show' style='padding:0 15px;box-sizing:border-box;'>
+      <view class='rulers' style='background:#e6be78;color:#fff;text-align:center;font-size:16px;height:35px;line-height:35px;margin-left:-15px;margin-right:-15px;'>领取规则</view>
+      <image src='../../images/smell.png' style='display:block;width:40px;height:40px;margin:18px auto;'></image>
+      <view class="text" style='font-size:14px;text-align:center;width:70%;margin:0 auto;'>分享给朋友，对方购买成功，您即可获得积分奖励！可在购买商品时抵扣现金，或者使用积分兑换礼品哦~</view>
+      <view class="cut-line" style='border-bottom:1px dotted #666;margin-top:25px;'></view>
+      <view class="btn-list" style='display:flex;justify-content:space-between;margin:20px 0'>
+        <button style='display:inline-block;line-height:1.7em;height:1.7em;margin:0;padding:0 10px;border:1px solid #e6be78;font-size:14px;border-radius:14.7px;color:#e6be78'  open-type='share'>分享给朋友</button>
+        <view style='display:inline-block;padding:0 10px;border:1px solid #e6be78;font-size:14px;border-radius:14.7px;color:#fff;background:#e6be78' class="wxcode" catchtap="showCode">生成小程序码</view>
+        <view style='display:inline-block;padding:0 10px;border:1px solid #e6be78;font-size:14px;border-radius:14.7px;color:#e6be78' bindtap='copyLink'>拷贝分享链接</view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 生成分享图片 -->
+ <view class='share-code item-mask' style="height:100%" wx:if="{{ ifShowCode }}">
+  <view class="item-mark2"></view>
+  <canvas canvas-id="shareCanvas" disable-scroll="true" bindtouchmove="cvsMove" wx:if="{{ ifShowCode }}" style="width:100%;height:{{windowHEI*0.9}}px;top:15px"></canvas> 
+<!-- 按钮 -->
+ <view class="btn-list" style="display:flex; justify-content:center;margin-top:30px;font-size:15px;position:relative;">
+    <view class="" style="width:90px;text-align:center;margin-right:15px;border:1px solid {{maincolor}};background:{{maincolor}};color:#fff;border-radius:14.7px;" bindtap="save">保存图片</view>
+    <view style="width:90px;text-align:center;border:1px solid {{secondcolor}};color:{{secondcolor}};border-radius:14.7px;" catchtap="hideCode">关闭</view>
+  </view>
+</view> 
+  </template>

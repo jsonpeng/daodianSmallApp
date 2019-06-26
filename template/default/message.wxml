@@ -1,0 +1,24 @@
+<template name="default">
+  <view class="collect" style="width:auto;">
+    <view wx:for="{{ messages }}" wx:for-item="cardTeam" wx:key="key" wx:for-index="index" wx:for-key="key" id="{{cardTeam.id}}" class="weui-cell weui-cell_swiped order-item" bindtouchstart="drawStart" data-index="{{ index}}" bindtouchmove="drawMove" bindtouchend="drawEnd"
+      style="right:{{cardTeam.right}}px">
+      <view class="weui-cell__bd">
+        <view class="weui-media-box weui-media-box_appmsg">
+          <view class="weui-media-box_hd">
+            <image class="weui-media-box__thumb" mode='widthFix' src="{{ cardTeam.data.type == '系统消息' ? '../../images/xt.png' : '../../images/tz.png' }}" alt=""></image>
+          </view>
+          <view class="weui-meida-box_bd">
+            <view class="weui-media-box_title">{{ cardTeam.data.type }} <text>{{cardTeam.currentTime}}</text></view>
+            <view class="weui-media-box__desc">
+              <!-- <view class="price">您有服务即将到期</view> -->
+              <view class="num">{{ cardTeam.data.content }}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell__ft" style='background:#e6be78;'>
+        <view class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" style='background:#e6be78;' data-index="{{ index }}" data-id="{{cardTeam.id}}" bindtap="delItem">删除</view>
+      </view>
+    </view>
+  </view>
+</template>

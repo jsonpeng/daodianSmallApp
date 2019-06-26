@@ -1,0 +1,39 @@
+<template name="default">
+<view class='store-img'>
+    <image src='{{ shops[index]["logo"] }}' mode='widthFix'></image>
+</view>
+<view class='weui-cell store-list-item'>
+  <view class='weui-cell__hd'>
+    <image class='locaiton' src='../../images/location.png' mode='widthFix'></image>
+  </view>
+  <view class='weui-cell__bd'>
+    <view class="store_name">{{ shops[index]["name"] }}</view>
+    <view class="locaiton">{{ shops[index]["address"] }}</view>
+  </view>
+  <view class='weui-cell__ft' bindtap='openMap' data-jindu="{{ shops[index]['jindu'] }}" data-weidu="{{ shops[index]['weidu'] }}">
+      <image src='../../images/line.png' mode='widthFix'></image>
+  </view>
+</view>
+
+<view class='weui-cells store-item-info'>
+    <view class='weui-cell'>
+        <view class='weui-cell__hd'>
+          <image class='locaiton' src='../../images/location.png' mode='widthFix'></image>
+        </view>
+        <view class='weui-cell__bd'>门店信息</view>
+    </view>
+    <view class='text'>
+      我们的使命是提供创新、可信赖的盈利的互联网解决方案,我们是一家为客户提供有营销效果的互联解决新、可信赖的盈利的互联网解决方案,我们是一家为客户提供有营销效果的互联解决
+    </view>
+    <view class='weui-cell contact-way'>
+        <view class='weui-cell__bd'>
+            <view>联系人：{{ shops[index]['contact_man'] }}</view>
+            <view>电话：{{ shops[index]["tel"] }}</view>
+            <view>微信：{{  shops[index]['weixin'] }}</view>
+        </view>
+        <view class='weui-cell__ft' data-tel="{{ shops[index]['tel'] }}" bindtap='phone'>
+            <image src='../../images/contact.png' mode='widthFix'></image>
+        </view>
+    </view>
+</view>
+</template>

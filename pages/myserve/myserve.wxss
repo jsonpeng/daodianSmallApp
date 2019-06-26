@@ -1,0 +1,88 @@
+/* pages/myserve/myserve.wxss */
+.navbar{
+  display:flex;
+  background-color: #fff;
+}
+.navbar .item{
+  flex:1;
+  text-align: center;
+  padding:0 15px;
+  font-size: 15px;
+}
+.navbar .item view{
+  height:30px;
+  line-height: 30px;
+  padding:15px 6px;
+}
+.navbar .active view{
+  color:#e6be78;
+  border-bottom: 1px solid #e6be78;
+}
+.serve-items{
+  padding:20px 12px;
+}
+.serve-item{
+  padding:0 20px;
+  margin-bottom: 13px;
+  background: url('https://www.qijianshen.xyz/uploads/serve-bg.png') no-repeat center center;
+  background-size:cover;
+}
+.serve-item .serve-name{
+  font-size:24px;
+  font-weight:bold;
+  padding:20px 0;
+}
+.serve-item .serve-last{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top:15px;
+  padding-bottom:10px;
+  border-top:1px solid #eaeaea;
+  border-bottom:1px solid #eaeaea;
+}
+.serve-item .serve-last .last-time{
+  font-size: 16px;
+  color:#845b2b;
+  
+}
+.serve-item .serve-last .last-time text{
+  padding-left: 15px;
+  padding-right: 5px;
+  font-size: 36px;
+  font-weight:bold;
+  color:#bc222c;
+}
+.serve-item .serve-last .use-info{
+  font-size:  16px;
+  color:#845b2b;
+  position:relative;
+  width:100%;
+  line-height: 30px;
+  height:60px;
+}
+.serve-item .serve-last .status-use{
+  position:absolute;
+  right:-20px;
+  top:-30px;
+  width:120px;
+  height:90px;
+}
+.serve-item .serve-last .use-info text{
+  padding-left: 20px;
+  font-weight:bold;
+}
+.serve-item .serve-last .erweima image{
+  width:45px;
+  height:45px;
+}
+.serve-item .serve-state{
+  padding:20px 0;
+}
+.serve-item .serve-state .serve-life{
+  font-size: 14px;
+
+}
+.serve-item .serve-state .serve-shop{
+  font-size:14px;
+}

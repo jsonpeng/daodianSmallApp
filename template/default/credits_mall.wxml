@@ -1,0 +1,18 @@
+<!-- 引入商品列表模板 -->
+<import src="../../template/common/list.wxml" />
+<template name="default">
+<view class='brand weui-cell'>
+  <view class='ft-l'>积分商城</view>
+  <view class='ft-s'>积分换礼品，会员等级越高,好礼越多!</view>
+</view>
+
+<view class="weui-tab__panel product-wrapper">
+  <block wx:for="{{ credits_products }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+    <template is="creditsProduct_list" data="{{ item }}"> </template>
+  </block>
+</view>
+
+<navigator class='weui-cell sub-form' url='../conversion/conversion'>
+  <view class=''>我的兑换</view>
+</navigator>
+</template>

@@ -1,0 +1,15 @@
+<template name="default">
+<view class='store_sum weui-cell'>共{{ products==undefined ? shops_length : products.shops.length }}家门店</view>
+<block wx:for="{{ products===undefined ? shops : products.shops}}" wx:for-item="item" wx:key="item" wx:for-index="index">
+    <view class='weui-cell store-list-item' data-index="{{ index }}" data-id="{{ item.id }}" bindtap='selectShops' wx:if="{{ item.id != null }}">
+      <view class='weui-cell__hd'>
+        <image class='locaiton' src='../../images/location.png' mode='widthFix'></image>
+      </view>
+      <view class='weui-cell__bd'>
+        <view class="store_name">{{ item.name }}</view>
+        <view class="locaiton">{{ item.address }}</view>
+      </view>
+      <view class='weui-cell__ft'><text wx:if="{{ item.distance > 1 }}"> {{ item.distance }} km </text> <text wx:else> {{ item.distance*1000 }} m </text> </view>
+    </view>
+</block>
+</template>

@@ -1,0 +1,93 @@
+/* pages/usercenter/coupon.wxss */
+
+.navbar {
+  display: flex;
+  background-color: #fff;
+}
+
+.navbar .item {
+  flex: 1;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.navbar .item text {
+  padding: 35rpx 0;
+  display: block;
+  font-size: 16px;
+}
+
+.navbar .active text {
+  color: #e6be78;
+  border-bottom: 1px solid #e6be78;
+}
+
+.total {
+  font-size: 17px;
+}
+
+.coupon-item {
+  padding: 0 7.5px;
+}
+
+.box {
+  position: relative;
+}
+
+.weui-cell-fl {
+  position: absolute;
+  left: 7.5px;
+  bottom: 0;
+  height: 7.5px;
+  width: 15px;
+  background-color: #f5f5f5;
+  border-radius: 7.5px 7.5px 0 0;
+}
+
+.weui-cell-fr {
+  position: absolute;
+  left: 7.5px;
+  top: 0;
+  height: 7.5px;
+  width: 15px;
+  background-color: #f5f5f5;
+  border-radius:  0 0 7.5px 7.5px;
+}
+.discount{padding:0 15rpx;}
+.weui_planel_item{border-radius:20rpx;background-color: #fff;margin-top: 30rpx;}
+.weui-tab__panel .weui-media-box_hd .type{
+  display:inline-block;
+padding:1px 4px;
+font-size:12px;
+color:#e6be78;
+border:1px solid #e6be78;
+text-align:center;
+border-radius:5px;
+}
+.weui-tab__panel .weui-media-box_hd .sum {
+  font-size:11px;
+
+}
+.weui-tab__panel .weui-media-box_hd .sum text{
+  font-family:"Axis";
+font-weight:bold;
+font-size:30px;
+  height: 1.2em;
+  line-height: 1.2em;
+}
+.weui-tab__panel .weui-media-box_bd .weui-media-box_title{
+  font-size:16px;
+color:#333;
+
+}
+.weui-tab__panel .weui-media-box_bd .weui-media-box_desc{
+  font-size:14px;
+color:#999;
+
+}
+.border{
+  height: 130rpx;
+  border-left:1px dashed #cacaca;
+}
+.weui-media-box.weui-media-box_appmsg{padding:0 15rpx;display: flex;align-items: center;align-content:center;}
+.weui-media-box.weui-media-box_appmsg .weui-media-box_hd{padding:0 20px;}

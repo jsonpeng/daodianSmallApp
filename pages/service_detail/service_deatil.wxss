@@ -1,0 +1,6 @@
+/* pages/service_detail/service_deatil.wxss */
+.qrCode{width: 60%;margin: 0 auto;}
+.qrCode image{width: 100%;}
+.program{border-bottom: 1px solid #f1f1f1;padding:20rpx 0;width: 100%;}
+.program .name{font-size: 14px;font-weight: bold;}
+.program .date,.program .times,.program .text{font-size: 14px;color: #9c9c9c;line-height: 1.7em;}

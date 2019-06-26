@@ -1,0 +1,156 @@
+<!-- 引入商品列表模板 -->
+<import src="../../template/common/list.wxml" />
+
+<template name="default">
+  <!-- 顶部搜索栏 -->
+  <view class='weui-cell serchBar'>
+    <view class='weui-cell__hd'>
+      <image class="location" src="../../images/location.png" mode="widthFix" bindtap='openMap' data-jindu="{{ shops[shop_tab]['jindu'] }}" data-weidu="{{ shops[shop_tab]['weidu'] }}"></image>
+      <navigator url="../store_list/store_list" data-address="{{ shops[shop_tab]['address'] }}">{{ shops[shop_tab]['name'] }}</navigator>
+      <image src="../../images/down.png" class="down" mode="widthFix"></image>
+    </view>
+    <view class='weui-cell__bd'>
+      <!-- <input placeholder="请输入要搜索的内容"></input>
+    <icon class="weui-icon-search" type="search" size="14"></icon> -->
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{search_val}}" focus="{{inputShowed}}" bindinput="searchword" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+            </view>
+          </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索</view>
+          </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="searchCancel" hidden="{{!inputShowed}}">取消</view>
+      </view>
+      <view class="weui-cells searchbar-result" wx:if="{{ search_product_list.length>0 }}">
+        <block wx:for="{{ search_product_list }}" wx:key="key" wx:for-key="item">
+          <navigator url="../product/product?product_id={{ item.share_title!=null?item.product_id:item.id }}" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>{{ item.name }}</view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+    <navigator url='../message/message' class='weui-cell__ft'>
+      <image class="message" mode="widthFix" src="../../images/kefu.png"></image>
+      <text  wx:if="{{  messages.length > 0}}">{{ messages.length }}</text>
+    </navigator>
+  </view>
+
+  <!-- 轮播广告 -->
+  <swiper class="banner" indicator-dots="{{  bannerSet.indicatorDots }}" autoplay="{{  bannerSet.autoplay}}" vertical="{{  bannerSet.vertical }}" interval="{{  bannerSet.interval }}" duration="{{  bannerSet.duration }}" circular="{{ bannerSet.circular}}">
+    <block wx:for="{{imgUrls}}" wx:key="key" wx:for-item="item">
+      <swiper-item>
+        <navigator>
+          <image src="{{item.image}}" mode="widthFix"></image>
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 热门资讯 -->
+  <view class="weui-cell notice">
+    <view class="weui-cell__hd">
+      <image src="../../images/notice.png" mode="widthFix"></image>
+      <text>公告：</text>
+    </view>
+    <view class="weui-cell__bd txtScroll-top">
+      <view class="bd">
+        <view class="tempWrap" style="overflow:hidden; position:relative; height:24px">
+          <swiper indicator-dots="{{ swiperSet.indicatorDots }}" autoplay="{{ swiperSet.autoplay}}" vertical="{{ swiperSet.vertical }}" interval="{{ swiperSet.interval }}" duration="{{ swiperSet.duration }}" circular="{{swiperSet.circular}}">
+            <block wx:for="{{ gonggao }}" wx:key="item" wx:for-index="index">
+              <swiper-item>
+                <!-- <navigator url="../webview/webview?url=https://quanqiugo.club/webview/notices/{{ item.id }}"> -->
+                <navigator url="../news/news?news_id={{ item.id }}">
+                  <!-- <text class="title">亲爱的全球GO</text> -->
+                  <text class="content">{{ item.name }}</text>
+                </navigator>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 当前店铺信息 -->
+  <navigator class='weui-cell weui-cell_access store_info' url='../store_detail/store_detail?index={{ shop_tab }}' wx:if="{{ shop_tab != '' }}">
+    <view class='weui-cell__hd'>
+      <image src="{{ shops[shop_tab]['logo'] }}" mode='widthFix'></image>
+    </view>
+    <view class='weui-cell__bd'>
+      <view class="store_name">{{ shops[shop_tab]['name'] }}</view>
+      <view class="locaiton">
+        <text wx:if="{{ shops[shop_tab]['distance'] > 1 }}"> {{ shops[shop_tab]['distance'] }} km </text>
+        <text wx:else> {{ shops[shop_tab]['distance']*1000 }} m </text>
+        <text wx:if="{{ shops[shop_tab]['min'] == true }}">离我最近</text>
+      </view>
+    </view>
+    <view class='weui-cell__ft'></view>
+  </navigator>
+
+  <view class='weui-cell add'>
+    <view class='weui-cell__bd'>{{ shops[shop_tab]['address'] }}</view>
+    <view class='weui-cell__ft'>
+      <image class="path" src='../../images/line.png' bindtap='openMap' data-jindu="{{ shops[shop_tab]['jindu'] }}" data-weidu="{{ shops[shop_tab]['weidu'] }}" mode="widthFix"></image>
+      <text></text>
+      <image class='call' data-tel="{{ shops[shop_tab]['tel'] }}" bindtap='phone' src='../../images/phone.png' mode="widthFix"></image>
+    </view>
+  </view>
+
+  <!-- 板块导航 -->
+  <view class="weui-grids index-function-grids">
+    <navigator url="../pay/pay" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/g1.png" mode='widthFix' alt=""></image>
+      </view>
+      <view class="weui-grid__label">优惠买单</view>
+    </navigator>
+    <navigator url="../myserve/myserve" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/g2.png" mode='widthFix' alt=""></image>
+      </view>
+      <view class="weui-grid__label">我的服务</view>
+    </navigator>
+    <navigator url="../usercenter/card" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/g3.png" mode='widthFix' alt=""></image>
+      </view>
+      <view class="weui-grid__label">我的会员</view>
+    </navigator>
+    <navigator url="../subscribe/subscribe" open-type="switchTab" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/g4.png" mode='widthFix' alt=""></image>
+      </view>
+      <view class="weui-grid__label">我的预约</view>
+    </navigator>
+  </view>
+
+  <!-- 服务内容切换 -->
+  <view class="services">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <view class="weui-navbar__item {{ productTab==-1?'weui-bar__item_on':'' }}" bindtap='switchTab' data-id="-1" data-index="-1">
+          <text>全部</text>
+        </view>
+        <block wx:for="{{ cats }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+          <view class="weui-navbar__item {{ productTab==index?'weui-bar__item_on':'' }}" bindtap='switchTab' data-id="{{ item.id }}" data-index="{{ index }}">
+            <text>{{ item.name }}</text>
+          </view>
+        </block>
+      </view>
+      <view class="weui-tab__panel product-wrapper">
+        <block wx:for="{{ products }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+          <template is="product_list" data="{{ item }}"> </template>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

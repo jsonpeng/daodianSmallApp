@@ -1,0 +1,6 @@
+<import src="../../template/default/card.wxml"  />
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>
+
+

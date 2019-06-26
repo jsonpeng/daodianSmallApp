@@ -1,0 +1,67 @@
+<!--默认商品列表-->
+<template name="product_list">
+    <navigator class="product-item2 fade_in" url="../product/product?product_id={{ item.share_title!=null?item.product_id:item.id }}" hover-class='none'>
+      <view class="img">
+        <image  style="display: block;" src="{{ item.image }}" ></image>
+        <!-- <image class="{{ item.loaded ? 'fade_in' : '' }}" style="display: block;" src="{{ item.image }}" wx:if="{{ item.loaded }}"></image> -->
+        <!-- <image src="../../images/default.png" alt="" wx:if="{{ !item.loaded }}"></image> -->
+        <text class="hot" wx:if="{{ item.is_hot }}"  style='background:{{ item.maincolor }}'>HOT</text>
+        <text class="hot" wx:if="{{ item.is_new }}"  style='background:{{ item.maincolor }}'>NEW</text>
+      </view>
+      <view class="title">{{ item.name }}</view>
+      <view class="price">¥{{ item.price }}
+        <text>{{ item.sales_count }}人购买</text>
+      </view>
+    </navigator>
+</template>
+<!--/默认商品列表-->
+<!-- 积分商城列表 -->
+<template name="creditsProduct_list">
+    <view class="product-item2 fade_in"  data-url="{{ item }}" bindtap='creditRedirect' hover-class='none'>
+      <view class="img">
+        <image  style="display: block;" src="{{ item.image }}" ></image>
+        <!-- <image class="{{ item.loaded ? 'fade_in' : '' }}" style="display: block;" src="{{ item.image }}" wx:if="{{ item.loaded }}"></image> -->
+        <!-- <image src="../../images/default.png" alt="" wx:if="{{ !item.loaded }}"></image> -->
+        <text class="hot" wx:if="{{ item.is_hot }}"  style='background:{{ item.maincolor }}'>HOT</text>
+        <text class="hot" wx:if="{{ item.is_new }}"  style='background:{{ item.maincolor }}'>NEW</text>
+      </view>
+      <view class="title">{{ item.name }}</view>
+      <view class="price"><text class='credits'>兑换积分：</text>{{ item.need_num }}
+        <text class='popularity'>人气 {{ item.count_time }}</text>
+      </view>
+    </view>
+</template>
+<!-- 积分商城列表 -->
+
+<!--social商品列表-->
+<template name="product_list_social">
+    <navigator class="product-item3 scroll-post fade_in" url="../product/product?product_id={{ item.share_title!=null?item.product_id:item.id }}">
+          <view class="img">
+            <image src="../../images/default.png" alt="" wx:if="{{ !item.loaded }}"></image>
+            <image class="{{ item.loaded ? 'fade_in' : '' }}" style="display: block;" src="{{ item.image }}" wx:if="{{ item.loaded }}"></image>
+          </view>
+          <view class="title">{{ item.name }}</view>
+          <view class="price">¥{{ item.price }} </view>
+        </navigator>
+</template>
+<!--/social商品列表-->
+
+<!--个人账户记录列表-->
+<template name="myself_account_list">
+    <view class="g-content">
+      <view class="info weui-flex">
+        <view class="weui-flex__item">{{ item.created_at }}</view>
+        <view class="weui-flex__item">{{ item.amount }}</view>
+        <view class="weui-flex__item">{{ item.change }}</view>
+        <view class="weui-flex__item click-detail" bindtap='toggleBtn' id="{{item.id}}">查看详情</view>
+        <view class="weui-flex__item pic">
+          <image class="open" src="../../images/top.png" alt=""></image>
+          <image class="shut" src="../../images/bottom.png" alt=""></image>
+        </view>
+      </view>
+      <view class='detail-txt down clearfix {{uhide==item.id?"":"hidden"}}'>
+      {{ item.detail }}
+      </view>
+    </view>
+</template>
+<!--/个人账户记录列表-->

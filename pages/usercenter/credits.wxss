@@ -1,0 +1,15 @@
+/* pages/usercenter/credits.wxss */
+.title{font-size: 14px;color: #333;background-color:#fff;}
+.title image{width:15px;margin-right: 10rpx;}
+.title .weui-cell__ft{color: #333;display: flex;align-items: center;}
+.credits{font-size: 40px;font-weight: bold;background-color: #fff;}
+.sub-form{padding:50rpx 7.5px;background-color: #fff;}
+.sub-form view{width: 100%;height:90rpx;line-height: 90rpx;text-align: center;background-color: #e6be78;color:#fff;font-size: 16px;}
+.change{background-color: #fff;margin: 5px 0;}
+.credits-item{background-color: #fff;margin-bottom: 5px;}
+.credits-item .weui-cell__hd{padding-left: 15rpx;color: #9c9c9c;}
+.credits-item  .ft-l{font-size: 16px;}
+.credits-item  .ft-s{font-size: 14px;}
+.credits-item  .state{color:#9c9c9c;}
+.credits-item .weui-cell__bd image{width: 25px;display: block;margin: 0 25rpx;}
+.credits-item .weui-cell__bd{display: flex;align-items: center;}

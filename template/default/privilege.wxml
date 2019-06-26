@@ -1,0 +1,17 @@
+<template name="default">
+<view class='privileges'>
+  <block wx:for="{{ myself.allUserLevel }}" wx:for-item="item" wx:key="item">
+      <view class='weui-cell level'>{{ item.name }}：</view>
+      <view class='weui-cell privilege'>
+        <view class='p-item'>
+          <image src='../../images/gift.png' mode='widthFix'></image>
+          <view class=''>{{ item.name }}{{ item.discount/10 }}折</view>
+        </view>
+      </view>
+  </block>
+  <!-- 按钮 -->
+  <navigator class='weui-cell sub-form' url='../recharge/recharge'>
+    <view class=''>{{ myself.nextUserLevel == null ? '我要充值' : '升级会员' }}</view>
+  </navigator>
+</view>
+</template>

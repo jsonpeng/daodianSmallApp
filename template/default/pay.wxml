@@ -1,0 +1,72 @@
+<template name="default">
+  <view class='list'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>消费总额（元）：</view>
+      <view class='weui-cell__ft'>
+        <input placeholder='请输入消费金额' value="{{ consu_price }}" placeholder-class="placeholder" bindinput='input1' bindblur="bindblur1" ></input>
+      </view>
+    </view>
+    <view class='intr'>不参与优惠金额（如酒水、套餐）</view>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>输入不参与优惠金额：</view>
+      <view class='weui-cell__ft'>
+        <input placeholder-class="placeholder" value="{{ no_dis_price }}" bindblur="bindblur2" bindinput='input2' bindchange="bindblur2"></input>
+      </view>
+    </view>
+    <view wx:if="{{ myself.user.user_money > 0 }}">
+      <view class='intr'>当前可用余额：¥{{ myself.user.user_money }}</view>
+      <view class='weui-cell balance-pay'>
+        <view class='weui-cell__bd'>使用余额支付：</view>
+        <view class='weui-cell__ft'>
+          <view class="counter">
+            <view class="fa fa-minus" style="float:left;" bindtap="numDel">
+            </view>
+            <input type="number" value="{{ request_data.use_user_money }}" bindinput='numInput' />
+            <view class="fa fa-plus" style="float:left;" bindtap="numAdd"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='weui-cell' wx:if="{{myself.userLevel.discount<100}}">
+      <view class='weui-cell__bd'>
+        <image src='../../images/zhe.jpg' mode='widthFix'></image> 会员立享{{myself.userLevel.discount/10}}折</view>
+      <view class='weui-cell__ft money' wx:if="{{ request_data.user_level_money != 0}}">-{{ request_data.user_level_money }}</view>
+    </view>
+    <view class='weui-cell' bindtap='showCoupon'>
+      <view class='weui-cell__bd' wx:if="{{ request_data.coupon_id == 0}}">选择优惠券:</view>
+       <view class='weui-cell__bd' wx:if="{{ request_data.coupon_id != 0}}">{{ coupon_text }}</view>
+      <view class='weui-cell__ft money'><image style='width:10px;height:10px;' src='../../images/click.png'></image></view>
+    </view>
+  </view>
+
+  <view class='btn'>
+    <view class='price'>实付金额（元）：
+      <text>¥{{ request_data.price }}</text>
+    </view>
+    <view class='pay_now' bindtap='payNow'>立即买单</view>
+  </view>
+
+
+  <!-- 优惠券选择 -->
+  <view>
+    <view class="weui-mask" id="iosMask" style='height:100%;' wx:if="{{ couponStatus }}" bindtap='chooseCoupon'></view>
+    <view class="weui-actionsheet" id="iosActionsheet" wx:if="{{ couponStatus }}">
+      <view class="weui-actionsheet__title">
+        <view class="weui-actionsheet__title-text">请选择优惠券</view>
+      </view>
+      <view class="weui-actionsheet__menu">
+        <block wx:for="{{ coupons }}" wx:for-item="item" wx:key="key" wx:for-index="index">
+          <view class='weui-actionsheet__cell coupon-cell' bindtap='useCoupon' data-id="{{ item.id }}" data-price="{{ item.coupon.given }}" data-text="满{{ item.coupon.base }}减{{ item.coupon.given }}">
+            <view class='price'>{{ item.coupon.given }}元</view>
+            <view class='des'>满{{ item.coupon.base }}可用</view>
+            <view class='time-range'>使用有效期{{ item.time_begin }}--{{ item.time_end }}</view>
+            <view class='usecoupon' bindtap='choosCoupon'>使用</view>
+          </view>
+        </block>
+      </view>
+      <view class="weui-actionsheet__action">
+        <view class="weui-actionsheet__cell" id="iosActionsheetCancel" bindtap='chooseCoupon'>取消</view>
+      </view>
+    </view>
+  </view>
+</template>

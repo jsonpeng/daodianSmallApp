@@ -1,0 +1,31 @@
+<template name="default">
+<view class='weui-cell title'>
+    <view class='weui-cell__bd'>账户余额（元）：</view>
+    <view class='weui-cell__ft'> <image src='../../images/tip_default.png' mode='widthFix'></image> 余额说明</view>
+</view>
+
+
+
+<view class='weui-cell credits' >{{ myself.user.user_money }}</view>
+<navigator url='../recharge/recharge' class='weui-cell sub-form'>
+  <view class=''>我要充值</view>
+</navigator>
+<view class='weui-cell change'>余额变动</view>
+
+<block wx:for="{{ funds }}" wx:for-item="item" wx:key="item">
+<view class='weui-cell credits-item'>
+    <view class='weui-cell__hd'>
+        <view class='ft-l'>{{ item.weekday }}</view>
+        <view class='ft-s'>{{ item.date }}</view>
+    </view>
+    <view class='weui-cell__bd'>
+        <image src='../../images/right.png' mode='widthFix'></image>
+        <view class='contents'>
+            <view class='num'>{{ item.change > 0 ? '+' + item.change : '-' + item.change }}</view>
+            <view class='state'>{{ item.detail }}</view>
+        </view>
+    </view>
+</view>
+</block>
+
+</template>

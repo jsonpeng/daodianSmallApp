@@ -1,0 +1,4 @@
+<template name="default">
+<!--pages/admin/index.wxml-->
+<text>管理首页</text>
+</template>

@@ -1,0 +1,6 @@
+<import src="../../template/default/checkout.wxml"  />
+
+
+
+<template is="{{ themeData.theme }}"  data="{{...themeData}}"></template>
+
